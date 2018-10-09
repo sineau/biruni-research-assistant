@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "webextensions": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "emotion"
+  ],
+  "rules": {
+    "no-console": "off",
+    "no-const-assign": "error",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-use-before-define": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "warn",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "no-extra-semi": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
+    "emotion/syntax-preference": [2, "string"]
+  },
+  "extends": "eslint:recommended"
+}

@@ -7,7 +7,6 @@ const HtmlPlugin = require('html-webpack-plugin');
 const host = "localhost";
 const port = 8080;
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const IS_EXT = process.env.NODE_ENV === 'ext';
 const dist = IS_PRODUCTION ? 'prod' : 'dev';
 
 const DIST_DIR = path.resolve(__dirname, dist)
@@ -17,21 +16,18 @@ const ASSET_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'eot', 'otf', 'svg', 'ttf
 module.exports = {
   context: SRC_DIR,
   entry: {
-    popup: './popup',
-    highlight: './highlight',
-    background: './background',
-    app: './app/app'
+    popup: './popup.jsx'
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, `./${dist}`)
+    publicPath: `/${dist}/`
   },
   devServer: {
     host: host,
     port: port,
     overlay: true,
     publicPath: '/dev/',
-    //    contentBase: DIST_DIR
+//    contentBase: DIST_DIR
   },
   resolve: {
     extensions: ['.js','.jsx']
@@ -41,37 +37,22 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        use: [
-          'babel-loader',
-          'eslint-loader'
-        ]
+        use: 'babel-loader',
       },
-      {
-        test: require.resolve('webextension-polyfill'),
-        use: 'imports-loader?browser=>undefined'
-      }
     ]
   },
   plugins: [
     new HtmlPlugin({
-      template: 'template.html',
-      chunks: ['popup']
+      template: 'template.html'
     }),
-    new HtmlPlugin({
-      template: 'template.html',
-      chunks: ['app'],
-      title: 'Research Assistant',
-      filename: 'app.html'
-    }),
-
-    new WriteFilePlugin(),
-    IS_EXT ? new webpack.ProvidePlugin({
+//    new WriteFilePlugin({}),
+    new webpack.ProvidePlugin({
       browser: 'webextension-polyfill'
-    }) : new Function(),
-    IS_EXT ? new WebpackShellPlugin({
+    }),
+    new WebpackShellPlugin({
       onBuildStart:[`web-ext run --s ${dist}`]
-    }) : new Function(),
+    }),
     IS_PRODUCTION ? new MinifyPlugin() : /* no-op */ new Function()
   ],
-  devtool: IS_PRODUCTION ? '' : 'cheap-module-source-map'
+  devtool: IS_PRODUCTION ? '' : 'inline-source-map'
 }

@@ -4,15 +4,26 @@
   "version": "0.0.1",
   "background": {
     "scripts": [
-      "background.bundle.js"
+      "./background/index.js"
     ]
   },
   "browser_action": {
-    "default_popup": "index.html",
+    "default_popup": "http://localhost:8080/dev/index.html",
     "default_icon": {
       "16": "./popup/icon/16.png",
       "32": "./popup/icon/32.png",
       "64": "./popup/icon/64.png"
+    }
+  },
+  "unsued": {
+    "options_ui": {
+      "page": "./options/index.html"
+    },
+    "page_action": {
+      "default_popup": "./popup/action.html"
+    },
+    "sidebar_action": {
+      "default_panel": "./sidebar/sidebar.html"
     }
   },
   "icons": {
@@ -22,9 +33,6 @@
     "128": "./icon/128.png"
   },
   "permissions": [
-    "<all_urls>",
-    "tabs",
-    "menus",
-    "bookmarks"
+    "activeTab"
   ]
 }

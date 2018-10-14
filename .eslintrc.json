@@ -7,15 +7,14 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017,
+    "ecmaVersion": 2018,
     "ecmaFeatures": {
       "jsx": true
     },
     "sourceType": "module"
   },
   "plugins": [
-    "react",
-    "emotion"
+    "react"
   ],
   "rules": {
     "no-console": "off",
@@ -25,13 +24,12 @@
     "no-use-before-define": "warn",
     "no-unreachable": "warn",
     "no-unused-vars": "warn",
+    "no-extra-semi": "error",
     "constructor-super": "warn",
     "valid-typeof": "warn",
-    "no-extra-semi": "error",
     "react/react-in-jsx-scope": "error",
     "react/jsx-uses-react": "warn",
-    "react/jsx-uses-vars": "warn",
-    "emotion/syntax-preference": [2, "string"]
+    "react/jsx-uses-vars": "warn"
   },
   "extends": "eslint:recommended"
 }

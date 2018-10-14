@@ -5,21 +5,42 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:ext": "NODE_ENV=ext npm run start",
+    "test": "babel-tape-runner 'tests/**/*.test.js' | faucet"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
     "babel-minify-webpack-plugin": "^0.3.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-plugin-styled-components": "^1.8.0",
+    "babel-tape-runner": "^3.0.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
     "css-loader": "^1.0.0",
+    "deep-freeze": "0.0.1",
+    "eslint": "^5.6.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "extend-tape": "^1.2.0",
+    "faucet": "0.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "imports-loader": "^0.8.0",
     "mini-css-extract-plugin": "^0.4.1",
+    "react-test-renderer": "^16.5.2",
+    "redux-logger": "^3.0.6",
+    "tap-notify": "^1.0.0",
+    "tap-nyan": "^1.1.0",
+    "tape": "^4.9.1",
+    "tape-jsx-equals": "^1.0.0",
+    "tape-promise": "^4.0.0",
     "web-ext": "^2.8.0",
+    "webextension-polyfill": "^0.3.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
@@ -27,8 +48,14 @@
     "write-file-webpack-plugin": "^4.3.2"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
+    "normalizr": "^3.2.4",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-redux": "^5.0.7"
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "style-loader": "^0.23.1",
+    "styled-components": "^3.4.9"
   }
 }

@@ -2,8 +2,8 @@ import * as type from '../action-types'
 function applyHydrateInfo(state,action) {
   return action.data
 }
-function applyAddInfo(state,{ type: actionType, payload }) {
-  const { id, tags, notes } = payload
+function applyAddInfo(state,{ type: actionType, id, tags = [], notes = {} }) {
+//  const { id, tags, notes } = args
   const item = state[id] || {}
   let updatedItem
   switch(actionType) {

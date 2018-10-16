@@ -25,12 +25,6 @@ const RenderFolderDry = ({ folder }) => {
        : ""
 }
 
-const folderStateToProps = (state, { id }) => ({
-  folder: select.currentFolder(state, id)
-})
-
-const RenderFolder = connect(folderStateToProps)(RenderFolderDry)
-
 const RenderParentDry = ({ onToggle, onFocus, folder, toggled }) => {
   let { id, subfolders: children } = folder
   let isToggled = toggled.indexOf(id) !== -1
@@ -69,12 +63,17 @@ const ParentStateToProps = (state) =>({
   toggled: select.toggleState(state)
 })
 const ParentDispatchToProps = (dispatch) => ({
-  onToggle: id => dispatch(doToggleFolder(id)),
-  onFocus: id => dispatch(doFocusFolder(id))
+  onToggle: (id) => dispatch(doToggleFolder({id})),
+  onFocus: id => dispatch(doFocusFolder({id}))
 })
 const ChildDispatchToProps = (dispatch) => ({
-  onFocus: id => dispatch(doFocusFolder(id))
+  onFocus: id => dispatch(doFocusFolder({id}))
 })
+const folderStateToProps = (state, { id }) => ({
+  folder: select.currentFolder(state, id)
+})
+
+const RenderFolder = connect(folderStateToProps)(RenderFolderDry)
 
 const RenderParent = connect(ParentStateToProps, ParentDispatchToProps)(RenderParentDry)
 const RenderChild = connect(null, ChildDispatchToProps)(RenderChildDry)

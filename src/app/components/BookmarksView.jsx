@@ -41,7 +41,7 @@ const BookmarksStateToProps = (state) => ({
 })
 
 const BookmarksDispatchToProps = (dispatch) => ({
-  onOpen: id => dispatch(doToggleBookmark(id))
+  onOpen: id => dispatch(doToggleBookmark({id}))
 })
 
 const BookmarksView = connect(BookmarksStateToProps, BookmarksDispatchToProps)(BookmarksViewDry)

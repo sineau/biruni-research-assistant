@@ -49,14 +49,10 @@ class ItemViewDry extends React.Component {
   }
   handleClose() {
     const { onSetTag, onSetNote, onClose, view } = this.props
-    onSetNote({
-      id: view,
-      notes: this.state.notes
-    })
-    onSetTag({
-      id: view,
-      tags: this.state.tags
-    })
+    const tags = this.state.tags,
+          notes = this.state.notes
+    onSetNote({id:view, notes})
+    onSetTag({id:view, tags})
     onClose(view)
   }
   render() {
@@ -82,10 +78,10 @@ const ItemStateToProps = (state, { view }) => ({
   tags: tagsState(state,view)
 })
 const ItemDispathToProps = (dispatch) => ({
-  onClose: id => dispatch(doToggleBookmark(id)),
-  onSetNote: (data) => dispatch(doSetNote(data)),
-  onSetTag: (data) => dispatch(doSetTag(data)),
-  onSetStorage: (data) => dispatch(doSetStorageInfo(data))
+  onClose: id => dispatch(doToggleBookmark({id})),
+  onSetNote: ({id,notes}) => dispatch(doSetNote({id,notes})),
+  onSetTag: ({id,tags}) => dispatch(doSetTag({id,tags})),
+  onSetStorage: (data) => dispatch(doSetStorageInfo({data}))
 })
 
 const ItemView = connect(ItemStateToProps, ItemDispathToProps)(ItemViewDry)

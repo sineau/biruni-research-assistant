@@ -20,7 +20,8 @@ module.exports = {
     popup: './extension/popup',
     highlight: './extension/highlight',
     background: './extension/background',
-    app: './app/app'
+    app: './app/app',
+    store: './store/store'
   },
   output: {
     filename: '[name].bundle.js',

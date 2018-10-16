@@ -178,10 +178,8 @@ test("Reducer: hydrate bookmark info state", t => {
 test("Reducer: add tags to bookmark", t => {
   const action = {
     type: 'SET_TAG',
-    payload: {
       id: 'v85IAOGM1NQe',
       tags: ['d', 'e']
-    }
   }
   const prevState = {
     'v85IAOGM1NQe': {
@@ -204,17 +202,13 @@ test("Reducer: add tags to bookmark", t => {
 test("Reducer: add notes to bookmark", t => {
   const action1 = {
     type: 'SET_NOTE',
-    payload: {
-      id: 'v85IAOGM1NQe',
-      notes: {4: 'd', 5: 'e'}
-    }
+    id: 'v85IAOGM1NQe',
+    notes: {4: 'd', 5: 'e'}
   }
   const action2 = {
     type: 'SET_NOTE',
-    payload: {
-      id: 'v85IAOGM1NQe',
-      notes: {1: 'd', 2: 'e'}
-    }
+    id: 'v85IAOGM1NQe',
+    notes: {1: 'd', 2: 'e'}
   }
   const prevState = {
     'v85IAOGM1NQe': {

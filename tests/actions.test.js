@@ -12,7 +12,7 @@ test("Action: toggle folder", (t) => {
       type: 'TOGGLE_FOLDER',
       id: id[i]
     }
-    const actual = actions.doToggleFolder(id[i])
+    const actual = actions.doToggleFolder({id: id[i]})
     t.deepEqual(actual, expected, 'Should toggle a folder by Id')
   }
 })
@@ -25,7 +25,7 @@ test("Action: focus folder", t => {
       type: 'FOCUS_FOLDER',
       id: id[i]
     }
-    const actual = actions.doFocusFolder(id[i])
+    const actual = actions.doFocusFolder({id: id[i]})
     t.deepEqual(actual, expected, 'Should focus a folder by Id')
   }
 })
@@ -38,7 +38,7 @@ test("Action: toggle bookmark", t => {
       type: 'TOGGLE_BOOKMARK',
       id: bookmarkId[i]
     }
-    const actual = actions.doToggleBookmark(bookmarkId[i])
+    const actual = actions.doToggleBookmark({id: bookmarkId[i]})
     t.deepEqual(actual, expected, 'Should toggle a bookmark by Id')
   }
 })
@@ -92,27 +92,15 @@ test("Action: Dehydrate bookmark info to local storage", t => {
   t.end()
 })
 
-test("Action: fetch bookmarks from local storage", t => {
-  const expected = {
-    type: 'FETCH_INFO',
-    data: {}
-  }
-  const actual = actions.doFetchInfo({})
-  t.deepEqual(actual, expected, 'Should fetch bookmark info from storage to state')
-  t.end()
-})
-
 test("Action: set note", t => {
   const expected = {
     type: 'SET_NOTE',
-    payload: {
-      id: 'v85IAOGM1NQe',
-      note: 'd'
-    }
+    id: 'v85IAOGM1NQe',
+    notes: 'd'
   }
   const actual = actions.doSetNote({
     id: 'v85IAOGM1NQe',
-    note: 'd'
+    notes: 'd'
   })
   t.deepEqual(actual, expected, 'Should add a new note')
   t.end()
@@ -121,10 +109,8 @@ test("Action: set note", t => {
 test("Action: set tags", t => {
   const expected = {
     type: 'SET_TAG',
-    payload: {
-      id: 'v85IAOGM1NQe',
-      tags: ['d']
-    }
+    id: 'v85IAOGM1NQe',
+    tags: ['d']
   }
   const actual = actions.doSetTag({
     id: 'v85IAOGM1NQe',

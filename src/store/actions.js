@@ -1,18 +1,18 @@
 import * as type from './action-types.js'
 
-export function doToggleFolder(id) {
+export function doToggleFolder({id}) {
   return {
     type: type.toggle_folder,
     id
   }
 }
-export function doFocusFolder(id) {
+export function doFocusFolder({id}) {
   return {
     type: type.focus_folder,
     id
   }
 }
-export function doToggleBookmark(id) {
+export function doToggleBookmark({id}) {
   return {
     type: type.toggle_bookmark,
     id
@@ -51,28 +51,25 @@ export function doDehydrateInfo(data) {
   }
 }
 
-export function doFetchInfo(data) {
-  return {
-    type: type.fetch_info,
-    data
-  }
-}
-
-export function doSetNote(data) {
+export function doSetNote({id,notes}) {
+//  const payload = {id: id, notes: notes}
+  console.log('note payload', {id,notes})
   return {
     type: type.set_note,
-    payload: data
+    id,
+    notes,
   }
 }
 
-export function doSetTag(data) {
+export function doSetTag({id, tags}) {
   return {
     type: type.set_tag,
-    payload: data
+    id,
+    tags
   }
 }
 
-export function doSetStorageInfo(data) {
+export function doSetStorageInfo({data}) {
   return {
     type: type.set_storage_info,
     data

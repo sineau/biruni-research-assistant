@@ -8,9 +8,11 @@ import { StyledParent, StyledChild, StyledDropdown } from '../styles/sidebar-sty
 import { TreeStyled } from '../styles/app-styled'
 
 export const RenderTreeDry = ({ tree }) => {
+  /* in chrome bookmark node ids are numbers starting at zero */
+  const root = tree ? (tree["root________"] || tree[0]) : null
   return(
     <TreeStyled>
-      {tree ? tree["root________"].subfolders.map((t) => <RenderFolder key={t} id={t} />) : ""
+      {root ? root.subfolders.map((t) => <RenderFolder key={t} id={t} />) : ""
       }
     </TreeStyled>
   )

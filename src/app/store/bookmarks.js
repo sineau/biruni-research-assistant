@@ -18,14 +18,16 @@ function mapBookmarks(node) {
 
 function mapFolders(node) {
   let { id, title, dateAdded, parentId = '', dateGroupModified } = node
+  /* filter check for url added becuase chrome doesn't have node type' */
   let bookmarks = node.children
-                      .filter(n => n.type === 'bookmark')
+                      .filter(n => n.type === 'bookmark' ||
+                                 (n.url && !n.url.match(/^data:/) ))
                       .filter(n => (n.title !== 'Recent Tags' &&
                                     n.title !== 'Most Visited' &&
                                     n.title !== 'Recently Bookmarked'))
                       .map(mapBookmarks)
   let subfolders = node.children
-                       .filter(n => n.type === 'folder')
+                       .filter(n => n.type === 'folder' || !n.url)
                        .map(n => {
                          subfolderStack.push(n)
                          return n.id
@@ -54,6 +56,7 @@ function mapTree(node) {
 function getBookmarkState(bookmarks) {
   return Promise.resolve(bookmarks).then(
     (r) => {
+
       return mapTree(r)
     },
     (e) => console.log('error in getBookmarkState', e)
@@ -71,6 +74,7 @@ folders.define({
 })
 
 function getBookmarkNormalized(state) {
+    console.log(state)
   return Promise.resolve(state).then(
     (result) =>  normalize(result, [folders]),
     (error) => console.log('error in normalization', error)

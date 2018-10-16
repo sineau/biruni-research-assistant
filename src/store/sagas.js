@@ -1,11 +1,11 @@
 import { select, call, put, all, take } from 'redux-saga/effects'
 
-import { getBookmarkNormalized, getBookmarkState } from './bookmarks'
-import { getStorageLocal, setStorageKey } from './storage'
+import { getBookmarkNormalized, getBookmarkState } from '../utils/bookmarks-helpers'
+import { getStorageLocal, setStorageKey } from '../utils/storage-helpers'
 import { rootFolders } from './selectors'
 import { doHydrateBookmarks, doFetchToggled, doHydrateInfo } from './actions'
-import * as actions from './action-types.js'
-import { bookmarks } from '../../../tests/state-data.js'
+import * as actions from './action-types'
+import { bookmarks } from '../../tests/state-data'
 
 export function* fetchBookmarks(action) {
   try {

@@ -1,7 +1,7 @@
 import test from 'tape'
 
-import { bookmarksState, currentFolder, full_state, folders } from './state-data.js'
-import * as select from '../src/app/store/selectors.js'
+import { bookmarksState, currentFolder, full_state, folders } from './state-data'
+import * as select from '../src/store/selectors'
 
 test('Selectors: root folder', t => {
   const expected = [ 'root________' ]

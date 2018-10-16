@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import ItemView from './ItemView'
 import BookmarksView from './BookmarksView'
-import { viewState } from '../store/selectors'
+import { viewState } from '../../store/selectors'
 
 import { MainStyled } from '../styles/app-styled'
 

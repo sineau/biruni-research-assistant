@@ -1,7 +1,7 @@
 import test from 'tape'
 
-import * as actions from '../src/app/store/actions.js'
-import { normalized } from './state-data.js'
+import * as actions from '../src/store/actions'
+import { normalized } from './state-data'
 const folderIds = ['root________', 'menu________', 'mqOlBB4jIAa6']
 
 test("Action: toggle folder", (t) => {

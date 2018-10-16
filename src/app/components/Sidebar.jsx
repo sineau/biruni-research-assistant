@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { doToggleFolder, doFocusFolder } from '../store/actions'
-import * as select from '../store/selectors'
+import { doToggleFolder, doFocusFolder } from '../../store/actions'
+import * as select from '../../store/selectors'
 
 import { StyledParent, StyledChild, StyledDropdown } from '../styles/sidebar-styled'
 import { TreeStyled } from '../styles/app-styled'

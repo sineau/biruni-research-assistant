@@ -1,11 +1,11 @@
 import test from 'tape'
 import deepFreeze from 'deep-freeze'
 
-import ToggleReducer from '../src/app/store/reducers/toggle.js'
-import FocusReducer from '../src/app/store/reducers/focus.js'
-import ViewReducer from '../src/app/store/reducers/view.js'
-import BookmarksReducer from '../src/app/store/reducers/bookmarks.js'
-import InfoReducer from '../src/app/store/reducers/info'
+import ToggleReducer from '../src/store/reducers/toggle'
+import FocusReducer from '../src/store/reducers/focus'
+import ViewReducer from '../src/store/reducers/view'
+import BookmarksReducer from '../src/store/reducers/bookmarks'
+import InfoReducer from '../src/store/reducers/info'
 
 import { normalized } from './state-data.js'
 

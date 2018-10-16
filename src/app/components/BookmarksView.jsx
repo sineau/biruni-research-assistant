@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { itemsState, focusState } from '../store/selectors'
-import { doToggleBookmark } from '../store/actions'
+import { itemsState, focusState } from '../../store/selectors'
+import { doToggleBookmark } from '../../store/actions'
 
 import { ItemStyled, ItemButton } from '../styles/bookmarks-styled'
 

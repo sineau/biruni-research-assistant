@@ -17,9 +17,9 @@ const ASSET_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'eot', 'otf', 'svg', 'ttf
 module.exports = {
   context: SRC_DIR,
   entry: {
-    popup: './popup',
-    highlight: './highlight',
-    background: './background',
+    popup: './extension/popup',
+    highlight: './extension/highlight',
+    background: './extension/background',
     app: './app/app'
   },
   output: {

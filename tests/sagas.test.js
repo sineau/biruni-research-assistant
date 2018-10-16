@@ -1,11 +1,11 @@
 import test from 'tape'
 import { take, put, call, select } from 'redux-saga/effects'
 
-import { getBookmarkState, getBookmarkNormalized } from '../src/app/store/bookmarks'
-import { getStorageLocal } from '../src/app/store/storage'
-import { doHydrateBookmarks, doFetchToggled, doHydrateInfo } from '../src/app/store/actions'
-import { fetchToggled, fetchBookmarks, fetchBookmarksInfo } from '../src/app/store/sagas.js'
-import { rootFolders } from '../src/app/store/selectors'
+import { getBookmarkState, getBookmarkNormalized } from '../src/utils/bookmarks-helpers'
+import { getStorageLocal, setStorageKey } from '../src/utils/storage-helpers'
+import { doHydrateBookmarks, doFetchToggled, doHydrateInfo } from '../src/store/actions'
+import { fetchToggled, fetchBookmarks, fetchBookmarksInfo, setBookmarkInfo } from '../src/store/sagas'
+import { rootFolders } from '../src/store/selectors'
 
 test("Saga: fetchBookmarks from bookmarks API", t => {
   const gen = fetchBookmarks([])

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { itemState, notesState, tagsState } from '../store/selectors'
-import { doToggleBookmark, doSetNote, doSetTag, doSetStorageInfo } from '../store/actions'
+import { itemState, notesState, tagsState } from '../../store/selectors'
+import { doToggleBookmark, doSetNote, doSetTag, doSetStorageInfo } from '../../store/actions'
 
 import AddNote from './ItemNotes'
 import AddTags from './ItemTags'

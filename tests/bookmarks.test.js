@@ -1,8 +1,8 @@
 import {test as tape} from 'tape'
 import _test from 'tape-promise'
 
-import { bookmarks, state, normalized } from './state-data.js'
-import {getBookmarkState, getBookmarkNormalized} from '../src/app/store/bookmarks.js'
+import { bookmarks, state, normalized } from './state-data'
+import {getBookmarkState, getBookmarkNormalized} from '../src/utils/bookmarks-helpers'
 
 const test = _test(tape)
 

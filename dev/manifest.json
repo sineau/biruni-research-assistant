@@ -10,21 +10,22 @@
   "browser_action": {
     "default_popup": "index.html",
     "default_icon": {
-      "16": "./popup/icon/16.png",
-      "32": "./popup/icon/32.png",
-      "64": "./popup/icon/64.png"
+      "16": "./icons/16.png",
+      "32": "./icons/32.png",
+      "64": "./icons/64.png"
     }
   },
   "icons": {
-    "16": "./icon/16.png",
-    "48": "./icon/48.png",
-    "96": "./icon/96.png",
-    "128": "./icon/128.png"
+    "16": "./icons/16.png",
+    "48": "./icons/48.png",
+    "96": "./icons/96.png",
+    "128": "./icons/128.png"
   },
   "permissions": [
     "<all_urls>",
     "tabs",
-    "menus",
+    "storage",
+    "contextMenus",
     "bookmarks"
   ]
 }

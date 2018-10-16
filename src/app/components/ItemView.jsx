@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { itemState, notesState, tagsState } from '../store/selectors'
-import { doToggleBookmark, doSetNote, doSetTag } from '../store/actions'
+import { doToggleBookmark, doSetNote, doSetTag, doSetStorageInfo } from '../store/actions'
 
 import AddNote from './ItemNotes'
 import AddTags from './ItemTags'
@@ -84,7 +84,8 @@ const ItemStateToProps = (state, { view }) => ({
 const ItemDispathToProps = (dispatch) => ({
   onClose: id => dispatch(doToggleBookmark(id)),
   onSetNote: (data) => dispatch(doSetNote(data)),
-  onSetTag: (data) => dispatch(doSetTag(data))
+  onSetTag: (data) => dispatch(doSetTag(data)),
+  onSetStorage: (data) => dispatch(doSetStorageInfo(data))
 })
 
 const ItemView = connect(ItemStateToProps, ItemDispathToProps)(ItemViewDry)

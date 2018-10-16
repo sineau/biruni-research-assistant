@@ -1,5 +1,5 @@
 import test from 'tape'
-import { put, call, select } from 'redux-saga/effects'
+import { take, put, call, select } from 'redux-saga/effects'
 
 import { getBookmarkState, getBookmarkNormalized } from '../src/app/store/bookmarks'
 import { getStorageLocal } from '../src/app/store/storage'
@@ -40,7 +40,7 @@ test("Saga: fetchToggled from root folder", t => {
 test("Saga: fetchBookmarksInfo from storage API", t => {
   const gen = fetchBookmarksInfo()
   const actual1 = gen.next().value
-  const expected1 = call(getStorageLocal, 'bookmarks')
+  const expected1 = call(getStorageLocal,[])
   t.deepEqual(actual1, expected1, 'Should yield to getStorageLocal')
 
   const actual2 = gen.next({}).value
@@ -49,15 +49,15 @@ test("Saga: fetchBookmarksInfo from storage API", t => {
   t.end()
 })
 
-test("Saga: set storage for bookmarks", t => {
-  const actual1 = ""
-  const expected1 = ""
+test("Saga: save bookmark info to storage", t => {
+  const id = 'X7pv4tRIPM9v'
+  const gen = setBookmarkInfo(id)
+  const actual1 = gen.next().value
+  const expected1 = take('SET_STORAGE_INFO')
+  t.deepEqual(actual1, expected1, 'Should take SET_STORAGE_INFO action')
+  const actual2 = gen.next().value
+  const expected2 = call(setStorageKey, id)
 
-  t.deepEqual(actual1, expected1, 'Should set new bookmark key if non exists')
-
-  const actual2 = ""
-  const expected2 = ""
-
-  t.deepEqual(actual2, expected2, 'Should update bookmark key if exists')
+  t.deepEqual(actual2, expected2, 'Should set bookmark key')
   t.end()
 })

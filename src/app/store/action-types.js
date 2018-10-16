@@ -11,4 +11,5 @@ export const toggle_folder = 'TOGGLE_FOLDER',
              remove_tag = 'REMOVE_TAG',
              remove_bookmark = 'REMOVE_BOOKMARK',
              dehydrate_info = 'DEHYDRATE_INFO',
-             fetch_info = 'FETCH_INFO'
+             fetch_info = 'FETCH_INFO',
+             set_storage_info = 'SET_STORAGE_INFO'

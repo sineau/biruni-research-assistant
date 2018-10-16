@@ -71,3 +71,10 @@ export function doSetTag(data) {
     payload: data
   }
 }
+
+export function doSetStorageInfo(data) {
+  return {
+    type: type.set_storage_info,
+    data
+  }
+}

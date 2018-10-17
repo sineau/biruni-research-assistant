@@ -1,16 +1,15 @@
-import { select, call, put, all, take } from 'redux-saga/effects'
+import { fork, select, call, put, all, take } from 'redux-saga/effects'
 
-import { getBookmarkNormalized, getBookmarkState } from '../utils/bookmarks-helpers'
-import { getStorageLocal, setStorageKey } from '../utils/storage-helpers'
+import getBookmarkState from '../utils/bookmarks-helpers'
+import { getStorageLocal, setStorageKey, getBookmarksTree } from '../utils/storage-helpers'
 import { rootFolders } from './selectors'
 import { doHydrateBookmarks, doFetchToggled, doHydrateInfo } from './actions'
 import * as actions from './action-types'
-import { bookmarks } from '../../tests/state-data'
 
-export function* fetchBookmarks(action) {
+export function* fetchBookmarks() {
   try {
-    const bookmarks = yield call(getBookmarkState, action)
-    const data = yield call(getBookmarkNormalized,bookmarks)
+    const tree = yield call(getBookmarksTree)
+    const data = yield call(getBookmarkState, tree)
     yield put(doHydrateBookmarks(data))
   } catch(e) {
     yield put({type:'ERROR_BOOKMARK_FETCH', message: e.message})
@@ -39,14 +38,26 @@ export function* setBookmarkInfo(action) {
     yield put({type: 'ERROR_SET_INFO', message: e.message})
   }
 }
+
+export function* updateTree() {
+  while(true){
+    try {
+      yield take(actions.update_tree)
+      yield call(fetchBookmarks)
+    } catch(e) {
+      yield put({type: 'ERROR_GET_TREE', message: e.message})
+    }
+  }
+}
+
 export function* initSagas() {
   try{
-    const getTree = (typeof browser !== 'undefined') ? browser.bookmarks.getTree() : bookmarks
-    yield call(fetchBookmarks,getTree)
+    yield call(fetchBookmarks)
     yield all([
       call(fetchToggled),
       call(fetchBookmarksInfo)
     ])
+    yield fork(updateTree)
   } catch(e) {
     yield put({type:'ERROR_INIT', message: e.message})
   }

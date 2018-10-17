@@ -75,3 +75,9 @@ export function doSetStorageInfo({data}) {
     data
   }
 }
+
+export function doUpdateTree() {
+  return {
+    type: type.update_tree
+  }
+}

@@ -12,4 +12,5 @@ export const toggle_folder = 'TOGGLE_FOLDER',
              remove_bookmark = 'REMOVE_BOOKMARK',
              dehydrate_info = 'DEHYDRATE_INFO',
              fetch_info = 'FETCH_INFO',
-             set_storage_info = 'SET_STORAGE_INFO'
+             set_storage_info = 'SET_STORAGE_INFO',
+             update_tree = 'UPDATE_TREE'

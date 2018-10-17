@@ -9,7 +9,7 @@ import actions from './action-map'
 
 const saga = createSagaMiddleware()
 const logger = createLogger()
-const store = createStore(RootReducer,
+export const store = createStore(RootReducer,
                                  undefined,
                                  applyMiddleware(saga,logger))
 saga.run(initSagas)

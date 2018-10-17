@@ -1,21 +1,21 @@
 import test from 'tape'
 import { take, put, call, select } from 'redux-saga/effects'
 
-import { getBookmarkState, getBookmarkNormalized } from '../src/utils/bookmarks-helpers'
-import { getStorageLocal, setStorageKey } from '../src/utils/storage-helpers'
+import getBookmarkState from '../src/utils/bookmarks-helpers'
+import { getStorageLocal, setStorageKey, getBookmarksTree } from '../src/utils/storage-helpers'
 import { doHydrateBookmarks, doFetchToggled, doHydrateInfo } from '../src/store/actions'
-import { fetchToggled, fetchBookmarks, fetchBookmarksInfo, setBookmarkInfo } from '../src/store/sagas'
+import { fetchToggled, fetchBookmarks, fetchBookmarksInfo, setBookmarkInfo, updateTree } from '../src/store/sagas'
 import { rootFolders } from '../src/store/selectors'
 
-test("Saga: fetchBookmarks from bookmarks API", t => {
-  const gen = fetchBookmarks([])
-  const actual1 = gen.next().value
-  const expected1 = call(getBookmarkState, [])
-  t.deepEqual(actual1, expected1, 'Should yield to getBookmarksState')
+test("Saga: fetchBookmarks", t => {
+  const gen = fetchBookmarks()
+  const actual = gen.next().value
+  const expected = call(getBookmarksTree)
+  t.deepEqual(actual, expected, 'Should yield to getBookmarksTree')
 
-  const actual2 = gen.next([]).value
-  const expected2 = call(getBookmarkNormalized, [])
-  t.deepEqual(actual2, expected2, 'Should yield to getBookmarknormalized')
+  const actual1 = gen.next([]).value
+  const expected1 = call(getBookmarkState,{})
+  t.deepEqual(actual1, expected1, 'Should yield to getBookmarksState')
 
   const actual3 = gen.next({}).value
   const expected3 = put(doHydrateBookmarks({}))
@@ -24,7 +24,7 @@ test("Saga: fetchBookmarks from bookmarks API", t => {
   t.end()
 })
 
-test("Saga: fetchToggled from root folder", t => {
+test("Saga: fetchToggled", t => {
   const gen = fetchToggled()
   const actual1 = gen.next().value
   const expected1 = select(rootFolders)
@@ -37,7 +37,7 @@ test("Saga: fetchToggled from root folder", t => {
   t.end()
 })
 
-test("Saga: fetchBookmarksInfo from storage API", t => {
+test("Saga: fetchBookmarksInfo", t => {
   const gen = fetchBookmarksInfo()
   const actual1 = gen.next().value
   const expected1 = call(getStorageLocal,[])
@@ -49,7 +49,7 @@ test("Saga: fetchBookmarksInfo from storage API", t => {
   t.end()
 })
 
-test("Saga: save bookmark info to storage", t => {
+test("Saga: setBookmarkInfo", t => {
   const id = 'X7pv4tRIPM9v'
   const gen = setBookmarkInfo(id)
   const actual1 = gen.next().value
@@ -59,5 +59,17 @@ test("Saga: save bookmark info to storage", t => {
   const expected2 = call(setStorageKey, id)
 
   t.deepEqual(actual2, expected2, 'Should set bookmark key')
+  t.end()
+})
+
+test("Sagas: UpdateTree", t => {
+  const gen = updateTree()
+  const actual1 = gen.next().value
+  const expected1 = take('UPDATE_TREE')
+  t.deepEqual(actual1, expected1, 'Should take UPDATE_TREE')
+  const actual2 = gen.next().value
+  const expected2 = call(fetchBookmarks)
+  t.deepEqual(actual2, expected2, 'Should yield to fetchBookmarks')
+
   t.end()
 })

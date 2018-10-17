@@ -43,25 +43,6 @@ function mapFolders(node) {
   }
   return folder
 }
-function mapTree(node) {
-  let tree = node.map(mapFolders)
-  while(subfolderStack.length > 0) {
-    let i = subfolderStack.length - 1
-    let newTree = mapFolders(subfolderStack.pop(i))
-    tree.push(newTree)
-  }
-  return tree
-}
-
-function getBookmarkState(bookmarks) {
-  return Promise.resolve(bookmarks).then(
-    (r) => {
-
-      return mapTree(r)
-    },
-    (e) => console.log('error in getBookmarkState', e)
-  )
-}
 
 /* Normalized */
 const bookmark = new schema.Entity('bookmarks')
@@ -73,12 +54,12 @@ folders.define({
   subfolders: [folders],
 })
 
-function getBookmarkNormalized(state) {
-    console.log(state)
-  return Promise.resolve(state).then(
-    (result) =>  normalize(result, [folders]),
-    (error) => console.log('error in normalization', error)
-  )
+export default function getBookmarkState(node) {
+  let tree = node.map(mapFolders)
+  while(subfolderStack.length > 0) {
+    let i = subfolderStack.length - 1
+    let newTree = mapFolders(subfolderStack.pop(i))
+    tree.push(newTree)
+  }
+  return normalize(tree, [folders])
 }
-
-export { getBookmarkNormalized, getBookmarkState }

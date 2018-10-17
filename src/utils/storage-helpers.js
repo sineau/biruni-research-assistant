@@ -10,3 +10,6 @@ export function setStorageKey(action) {
   }
 
 }
+export function getBookmarksTree() {
+  return browser.bookmarks.getTree().then(r => r)
+}

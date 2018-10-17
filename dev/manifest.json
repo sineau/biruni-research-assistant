@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "background": {
     "scripts": [
-      "background.bundle.js",
-      "store.bundle.js"
+      "background.bundle.js"
     ]
   },
   "browser_action": {

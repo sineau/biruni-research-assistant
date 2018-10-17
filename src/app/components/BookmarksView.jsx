@@ -20,16 +20,20 @@ const ItemList = ({item,id,onClick}) => {
 }
 
 const BookmarksViewDry = ({ focus, bookmarks, onOpen }) => {
+  function renderItems(b) {
+    const nodes = Object.keys(b)
+                        .filter(id => focus ?
+                                      focus === bookmarks[id].parentId : true)
+    return nodes.length ? nodes.map(id => (<ItemList id={id} key={id}
+                                                     item={bookmarks[id]}
+                                                     onClick={onOpen} />)
+    ) : "Empty 😒"
+  }
   return(
     <div>
-      <h2>List</h2>
+      <h2>Bookmarks List</h2>
       <div>
-        {bookmarks ? Object.keys(bookmarks)
-                           .filter(id => focus ? focus === bookmarks[id].parentId : true)
-                           .map(id => (<ItemList id={id} key={id}
-                                                 item={bookmarks[id]}
-                                                 onClick={onOpen} />))
-         : <div>Wait</div>}
+        {bookmarks ? renderItems(bookmarks) : <div>Wait</div>}
       </div>
     </div>
   )

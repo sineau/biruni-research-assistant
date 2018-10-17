@@ -11,10 +11,12 @@ export const RenderTreeDry = ({ tree }) => {
   /* in chrome bookmark node ids are numbers starting at zero */
   const root = tree ? (tree["root________"] || tree[0]) : null
   return(
+    root ?
     <TreeStyled>
-      {root ? root.subfolders.map((t) => <RenderFolder key={t} id={t} />) : ""
-      }
+      <h2>Folders</h2>
+      <RenderFolder key={root.id} id={root.id} />
     </TreeStyled>
+    : ""
   )
 }
 
@@ -26,19 +28,20 @@ const RenderFolderDry = ({ folder }) => {
 }
 
 const RenderParentDry = ({ onToggle, onFocus, folder, toggled }) => {
-  let { id, subfolders: children } = folder
+  let { id, subfolders, parentId } = folder
   let isToggled = toggled.indexOf(id) !== -1
+  let [focusId, folderTitle] = parentId ? [id, folder.title] : ["", "All Bookmarks"]
   return(
     <StyledParent>
       <StyledDropdown onClick={() => onToggle(id)} toggled={isToggled} />
-      <div onClick={() => onFocus(id)}
+      <div onClick={() => onFocus(focusId)}
            id={id}
            className="folder-title">
-        {folder.title}
+        {folderTitle || "No Name Folder"}
       </div>
       {(isToggled) ?
        (<div>
-         {children.map((i) => <RenderFolder key={i} id={i} />)}
+         {subfolders.map((i) => <RenderFolder key={i} id={i} />)}
        </div>) : ""
       }
     </StyledParent>
